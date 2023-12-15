@@ -69,7 +69,7 @@ export default {
       <li v-for="movie in store.movies">
         <h3>{{ movie.title }}</h3>
         <h5>{{ movie.original_title }}</h5>
-        <h5>
+        <h5 class="lingua">
           <img
             v-if="movie.original_language === 'it'"
             src="/img/it.png"
@@ -83,6 +83,7 @@ export default {
           <span v-else>{{ movie.original_language }}</span>
         </h5>
         <h5>{{ movie.vote_average }}</h5>
+        <img :src="store.apiImageMovie + movie.poster_path" alt="" />
       </li>
     </ul>
   </div>
@@ -92,7 +93,7 @@ export default {
       <li v-for="show in store.shows">
         <h3>{{ show.name }}</h3>
         <h5>{{ show.original_name }}</h5>
-        <h5>
+        <h5 class="lingua">
           <img
             v-if="show.original_language === 'it'"
             src="/img/it.png"
@@ -106,6 +107,7 @@ export default {
           <span v-else>{{ show.original_language }}</span>
         </h5>
         <h5>{{ show.vote_average }}</h5>
+        <img :src="store.apiImageMovie + show.poster_path" alt="" />
       </li>
     </ul>
   </div>
@@ -114,7 +116,9 @@ export default {
 <style lang="scss">
 @use './assets/scss/partials/reset' as *;
 
-img {
-  max-height: 10px;
+.lingua {
+  img {
+    max-height: 10px;
+  }
 }
 </style>

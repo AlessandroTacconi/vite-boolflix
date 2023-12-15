@@ -7,4 +7,5 @@ export const store = reactive({
   searchMovie: '',
   shows: [],
   apiShowsURL: 'https://api.themoviedb.org/3/search/tv',
+  apiImageMovie: 'https://image.tmdb.org/t/p/w185',
 });
