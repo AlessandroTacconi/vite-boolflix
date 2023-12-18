@@ -1,10 +1,29 @@
 <script>
+// IMPORT
 import axios from 'axios';
 import { store } from './store';
 import AppForm from './components/AppForm.vue';
-import AppHeader from './components/AppHeader.vue';
 import Card from './components/card.vue';
 
+const chiamataAxios = (url, storeArray) => {
+  return axios
+    .get(url, {
+      params: {
+        language: 'it',
+        api_key: store.MyKey,
+        query: store.searchMovie,
+      },
+    })
+    .then((response) => {
+      store[storeArray] = response.data.results;
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error('Errore nella richiesta API:', error);
+    });
+};
+
+// EXPORT
 export default {
   name: 'App',
   components: {
@@ -18,45 +37,20 @@ export default {
   },
   methods: {
     search() {
-      axios
-        .get(this.store.apiMovieURL, {
-          params: {
-            language: 'it',
-            api_key: this.store.MyKey,
-            query: this.store.searchMovie,
-          },
-        })
-        .then((response) => {
-          this.store.movies = response.data.results;
-          console.log(response);
-        })
-        .catch((error) => {
-          console.error('Errore nella richiesta API:', error);
-        });
-
-      axios
-        .get(this.store.apiShowsURL, {
-          params: {
-            language: 'it',
-            api_key: this.store.MyKey,
-            query: this.store.searchMovie,
-          },
-        })
-        .then((response) => {
-          this.store.shows = response.data.results;
-          console.log(response);
-        })
-        .catch((error) => {
-          console.error('Errore nella richiesta API:', error);
-        });
+      chiamataAxios(this.store.apiMovieURL, 'movies');
+      chiamataAxios(this.store.apiShowsURL, 'shows');
     },
   },
 };
 </script>
 
 <template>
+  <!-- FORM -->
   <AppForm :store="store" @search="search" />
+  <!-- /FORM -->
+  <!-- TITOLO -->
   <h2>In catalogo</h2>
+  <!-- CARD MOVIES-->
   <div>
     <h2 v-if="store.movies.length">Movies</h2>
     <ul>
@@ -71,6 +65,10 @@ export default {
       </li>
     </ul>
   </div>
+  <!-- /CARD MOVIES-->
+
+  <!-- CARD SHOWS-->
+
   <div>
     <h2 v-if="store.shows.length">Shows</h2>
     <ul>
@@ -85,6 +83,7 @@ export default {
       </li>
     </ul>
   </div>
+  <!-- /CARD SHOWS-->
 </template>
 
 <style lang="scss">

@@ -1,4 +1,5 @@
 <script>
+// EXPORT
 export default {
   name: 'Card',
   props: ['title', 'original_title', 'language', 'vote', 'img'],
@@ -20,6 +21,7 @@ export default {
 </script>
 
 <template>
+  <!-- CARDS -->
   <div>
     <img :src="img" alt="" />
     <h3>{{ title }}</h3>
@@ -29,12 +31,13 @@ export default {
       <img v-else-if="language === 'en'" src="/img/eng.png" alt="en" />
       <span v-else>{{ language }}</span>
     </h5>
-    <h5>{{ vote }}</h5>
+    <!-- <h5>{{ vote }}</h5> -->
     <p>
       <font-awesome-icon icon="fa-solid fa-star" v-for="n in voto" />
       <font-awesome-icon icon="fa-regular fa-star" v-for="n in BordStar" />
     </p>
   </div>
+  <!-- /CARDS -->
 </template>
 
 <style scoped></style>
