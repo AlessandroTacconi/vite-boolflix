@@ -1,11 +1,20 @@
 <script>
+import AppForm from './AppForm.vue';
+
 export default {
   name: 'AppHeader',
+  //   props: ['store'],
+  //   components: {
+  //     AppForm,
+  //   },
+  //   methods: {
+  //     search() {
+  //       this.$emit('search');
+  //     },
+  //   },
 };
 </script>
 
-<template>
-  <h1>Template</h1>
-</template>
+<template>// <AppForm @submit="search" /></template>
 
 <style scoped></style>
